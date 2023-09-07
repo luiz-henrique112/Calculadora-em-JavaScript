@@ -19,17 +19,20 @@ function handleClick(event) {
     if (equation) {
       try {
         const result = eval(equation); // Avalia a expressão
-        if (isNaN(result)) {
-          throw new Error('Expressão inválida');
+        if (isNaN(result) || !isFinite(result)) {
+          alert('Expressão inválida'); // Exibe uma mensagem de erro caso a expressão seja inválida
+          input.innerHTML = ''; // Limpa o campo de entrada
+        } else {
+          input.innerHTML = result; // Exibe o resultado no campo de entrada
         }
-        input.innerHTML = result; // Exibe o resultado no campo de entrada
       } catch (error) {
-        alert('Erro na expressão'); // Exibe uma mensagem de erro caso a expressão seja inválida
-        input.innerHTML = ''
+        alert('Erro na expressão'); // Exibe uma mensagem de erro caso ocorra um erro na avaliação da expressão
+        input.innerHTML = ''; // Limpa o campo de entrada
       }
     }
   } else {
     input.innerHTML += buttonValue; // Adiciona o valor do botão ao campo de entrada
   }
 }
+
 
